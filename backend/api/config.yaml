@@ -1,0 +1,11 @@
+kumuluzee:
+  name: ehive
+  version: 1.0.0
+  env:
+    name: dev
+  datasources:
+  - jndi-name: jdbc/EhiveDS
+    connection-url: jdbc:postgresql://127.0.0.1:53514/pkp
+    username: postgres
+    password: PGpostgres
+    max-pool-size: 20

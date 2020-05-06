@@ -28,4 +28,12 @@ public class Podnica {
     public void setNaziv(String naziv) {
         this.naziv = naziv;
     }
+
+    @Override
+    public String toString() {
+        return "Podnica{" +
+                "id=" + id +
+                ", naziv='" + naziv + '\'' +
+                '}';
+    }
 }

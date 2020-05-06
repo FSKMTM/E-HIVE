@@ -26,7 +26,7 @@ public class JPAServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         logger.info("doGet");
 
-        List<Podnica> podnice = podnicaZrno.pridobiVse();
+        List<Podnica> podnice = podnicaZrno.pridobiPodnice();
 
         resp.setContentType("text/html");
         // izpis uporabnikov na spletno stran

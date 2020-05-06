@@ -63,4 +63,15 @@ public class Meritev {
     public void setPodnica_id(Podnica podnica_id) {
         this.podnica_id = podnica_id;
     }
+
+    @Override
+    public String toString() {
+        return "Meritev{" +
+                "id=" + id +
+                ", vrednost=" + vrednost +
+                ", tip=" + tip +
+                ", cas_meritve=" + cas_meritve +
+                ", podnica_id=" + podnica_id +
+                '}';
+    }
 }

@@ -33,7 +33,7 @@ public class JPAServlet extends HttpServlet {
         PrintWriter printWriter = new PrintWriter(resp.getWriter());
         printWriter.print("Vse podnice: \n<br>");
         for (Podnica podnica : podnice) {
-            printWriter.print(podnica.getId()+"<br>");
+            printWriter.print(podnica.getId()+ " " + podnica.getNaziv() + "<br>");
 
         }
 

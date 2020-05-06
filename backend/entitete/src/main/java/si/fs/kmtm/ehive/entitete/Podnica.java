@@ -8,7 +8,10 @@ import javax.persistence.*;
 })
 public class Podnica {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    private String naziv;
 
     public int getId() {
         return id;
@@ -16,5 +19,13 @@ public class Podnica {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getNaziv() {
+        return naziv;
+    }
+
+    public void setNaziv(String naziv) {
+        this.naziv = naziv;
     }
 }

@@ -40,9 +40,7 @@ public class PodnicaZrno {
         Podnica podnica = em.find(Podnica.class, id);
 
         if (podnica != null) {
-            em.getTransaction().begin();
             em.remove(podnica);
-            em.getTransaction().commit();
             return true;
         }
         return false;

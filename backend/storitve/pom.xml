@@ -24,6 +24,7 @@
             <groupId>si.uni-lj.fs.kmtm</groupId>
             <artifactId>entitete</artifactId>
         </dependency>
+
     </dependencies>
 
 

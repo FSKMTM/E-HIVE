@@ -3,6 +3,7 @@ INSERT INTO tip (koda) VALUES ('TEMP2');
 INSERT INTO tip (koda) VALUES ('VLA1');
 INSERT INTO tip (koda) VALUES ('VLA2');
 INSERT INTO tip (koda) VALUES ('VAROA');
+INSERT INTO tip (koda) VALUES ('TEZA');
 
 INSERT INTO podnica (naziv) VALUES ('Dominikova podnica');
 

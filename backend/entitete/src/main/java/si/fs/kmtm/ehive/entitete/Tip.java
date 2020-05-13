@@ -3,6 +3,7 @@ package si.fs.kmtm.ehive.entitete;
 import javax.persistence.*;
 
 @Entity(name = "tip")
+@NamedQuery(name="Tip.getAll", query = "SELECT t FROM tip t")
 public class Tip {
     @Id
 //    @Enumerated(EnumType.STRING)

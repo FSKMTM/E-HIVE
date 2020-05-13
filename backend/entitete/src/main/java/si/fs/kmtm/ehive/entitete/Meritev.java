@@ -21,8 +21,8 @@ public class Meritev {
     private Calendar cas_meritve;
 
     @ManyToOne
-    @JoinColumn(name = "podnica_id")
-    private Podnica podnica_id;
+    @JoinColumn(name = "podnica")
+    private Podnica podnica;
 
     public int getId() {
         return id;
@@ -56,12 +56,12 @@ public class Meritev {
         this.cas_meritve = cas_meritve;
     }
 
-    public Podnica getPodnica_id() {
-        return podnica_id;
+    public Podnica getPodnica() {
+        return podnica;
     }
 
-    public void setPodnica_id(Podnica podnica_id) {
-        this.podnica_id = podnica_id;
+    public void setPodnica(Podnica podnica) {
+        this.podnica = podnica;
     }
 
     @Override
@@ -71,7 +71,7 @@ public class Meritev {
                 ", vrednost=" + vrednost +
                 ", tip=" + tip +
                 ", cas_meritve=" + cas_meritve +
-                ", podnica_id=" + podnica_id +
+                ", podnica_id=" + podnica +
                 '}';
     }
 }

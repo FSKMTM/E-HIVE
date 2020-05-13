@@ -40,9 +40,7 @@ public class MeritevZrno {
         Meritev meritev = em.find(Meritev.class, id);
 
         if (meritev != null) {
-            em.getTransaction().begin();
             em.remove(meritev);
-            em.getTransaction().commit();
             return true;
         }
         return false;

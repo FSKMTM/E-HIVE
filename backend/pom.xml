@@ -21,6 +21,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <postgresql.version>42.2.5</postgresql.version>
         <kumuluzee.version>3.0.0</kumuluzee.version>
+        <kumuluzee-rest.version>1.2.3</kumuluzee-rest.version>
     </properties>
 
     <dependencyManagement>
@@ -52,40 +53,11 @@
                 <artifactId>postgresql</artifactId>
                 <version>${postgresql.version}</version>
             </dependency>
-            <!--<dependency>-->
-                <!--<groupId>javax.xml.bind</groupId>-->
-                <!--<artifactId>jaxb-api</artifactId>-->
-                <!--<version>2.3.0</version>-->
-            <!--</dependency>-->
-            <!--<dependency>-->
-                <!--<groupId>com.sun.xml.bind</groupId>-->
-                <!--<artifactId>jaxb-core</artifactId>-->
-                <!--<version>2.3.0</version>-->
-            <!--</dependency>-->
-            <!--<dependency>-->
-                <!--<groupId>com.sun.xml.bind</groupId>-->
-                <!--<artifactId>jaxb-impl</artifactId>-->
-                <!--<version>2.3.0</version>-->
-            <!--</dependency>-->
-            <!-- API, java.xml.bind module -->
-            <!--<dependency>-->
-                <!--<groupId>jakarta.xml.bind</groupId>-->
-                <!--<artifactId>jakarta.xml.bind-api</artifactId>-->
-                <!--<version>2.3.2</version>-->
-            <!--</dependency>-->
-
-            <!-- Runtime, com.sun.xml.bind module -->
-            <!--<dependency>-->
-                <!--<groupId>org.glassfish.jaxb</groupId>-->
-                <!--<artifactId>jaxb-runtime</artifactId>-->
-                <!--<version>2.3.2</version>-->
-            <!--</dependency>-->
-            <!--<dependency>-->
-                <!--<groupId>org.glassfish.jersey.media</groupId>-->
-                <!--<artifactId>jersey-media-jaxb</artifactId>-->
-                <!--<version>2.21.1</version>-->
-            <!--</dependency>-->
-            <!-- Thanks for using https://jar-download.com -->
+            <dependency>
+                <groupId>com.kumuluz.ee.rest</groupId>
+                <artifactId>kumuluzee-rest-core</artifactId>
+                <version>${kumuluzee-rest.version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>

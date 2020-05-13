@@ -1,5 +1,6 @@
 package si.fs.kmtm.ehive.api.v1.viri;
 
+import com.kumuluz.ee.rest.beans.QueryParameters;
 import si.fs.kmtm.ehive.api.JPAServlet;
 import si.fs.kmtm.ehive.entitete.Meritev;
 import si.fs.kmtm.ehive.entitete.Podnica;
@@ -13,8 +14,10 @@ import si.fs.kmtm.ehive.storitve.zrna.TipZrno;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -35,11 +38,14 @@ public class MeritevVir {
     @Inject
     private TipZrno tipZrno;
 
+    @Context
+    protected UriInfo uriInfo;
+
     @GET
     public Response vrniMeritve() {
-//        QueryParameters query = QueryParameters.query(uriInfo.getRequestUri().getQuery()).build();
-        List<Meritev> meritve = meritevZrno.pridobiMeritve();
-        return Response.status(Response.Status.OK).entity(meritve).build();
+        QueryParameters query = QueryParameters.query(uriInfo.getRequestUri().getQuery()).build();
+        List<Meritev> meritve = meritevZrno.pridobiMeritve(query);
+        return Response.status(Response.Status.OK).entity(meritve).header("X-Total-Count", meritevZrno.stMeritev(query)).build();
     }
 
     @Path("{id}")

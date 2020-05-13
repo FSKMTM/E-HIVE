@@ -24,6 +24,12 @@
             <groupId>si.uni-lj.fs.kmtm</groupId>
             <artifactId>entitete</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.kumuluz.ee.rest</groupId>
+            <artifactId>kumuluzee-rest-core</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
 
     </dependencies>
 

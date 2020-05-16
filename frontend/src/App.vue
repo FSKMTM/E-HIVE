@@ -3,23 +3,37 @@
     <div>
       <Topbar></Topbar>
     </div>
-  <div>
-    <router-view></router-view>
-  </div>
-
-
+    <div>
+      <b-container class="app-container">
+        <router-view :podnice="podnice"></router-view>
+      </b-container>
+    </div>
   </div>
 </template>
 
 <script>
 import Topbar from '@/components/Topbar.vue'
+import global from '@/global'
 
 export default {
   components: {
     Topbar
   },
   data () {
-    return {}
+    return {
+      podnice: []
+    }
+  },
+  created: function () {
+    fetch(global.restIp + "/podnice", {
+      method: "get"
+    })
+      .then((response) => {
+        return response.json()
+      })
+      .then((jsonData) => {
+        this.podnice = jsonData
+      })
   }
 }
 </script>
@@ -30,19 +44,13 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
 }
 
-#nav {
-  padding: 30px;
+/* h2 {
+  text-align: left;
+} */
+.app-container {
+  margin-top:10px;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>

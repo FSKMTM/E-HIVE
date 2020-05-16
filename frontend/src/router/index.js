@@ -14,7 +14,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Domov',
+    name: 'E-HIVE',
     component: Home
   },
   {
@@ -51,6 +51,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  mode: 'history',
   routes
 })
 

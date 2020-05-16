@@ -80,13 +80,14 @@ export default {
   },
 	methods: {
 		pridobiZadnjeMeritve: function () {
-			fetch(global.restIp + "/meritve?filter=podnica.id:EQ:" + this.izbranaPodnica, {
+			fetch(global.restIp + "/meritve/latest?id=" + this.izbranaPodnica, {
 				method: "get"
 			})
 				.then((response) => {
 					return response.json()
 				})
 				.then((jsonData) => {
+					console.log(jsonData)
 					this.zadnjeMeritve = jsonData
 				})
 		},

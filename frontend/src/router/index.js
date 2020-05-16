@@ -24,7 +24,7 @@ const routes = [
   },
   {
     path: '/grafi',
-    name: 'Graphs',
+    name: 'Grafi',
     component: Graphs
   },
   {

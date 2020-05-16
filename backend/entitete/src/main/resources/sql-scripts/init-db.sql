@@ -6,6 +6,7 @@ INSERT INTO tip (koda) VALUES ('VAROA');
 INSERT INTO tip (koda) VALUES ('TEZA');
 
 INSERT INTO podnica (naziv) VALUES ('Dominikova podnica');
+INSERT INTO podnica (naziv) VALUES ('Gašperjeva podnica');
 
 INSERT INTO meritev (vrednost, tip_koda, cas_meritve, podnica) VALUES (25.8, 'TEMP1', '2015-08-07 05:00:01', 1);
 INSERT INTO meritev (vrednost, tip_koda, cas_meritve, podnica) VALUES (24.8, 'TEMP2', '2015-08-07 06:00:01', 1);

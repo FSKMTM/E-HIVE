@@ -37,6 +37,11 @@
             <groupId>si.uni-lj.fs.kmtm</groupId>
             <artifactId>storitve</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.kumuluz.ee.cors</groupId>
+            <artifactId>kumuluzee-cors</artifactId>
+            <version>${kumuluzee-cors.version}</version>
+        </dependency>
 
 
     </dependencies>

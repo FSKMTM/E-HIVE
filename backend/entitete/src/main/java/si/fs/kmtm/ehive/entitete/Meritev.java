@@ -17,7 +17,7 @@ public class Meritev {
     @ManyToOne
     private Tip tip;
 
-    @Temporal(TemporalType.TIMESTAMP)
+//    @Temporal(TemporalType.TIMESTAMP)
     private Calendar cas_meritve;
 
     @ManyToOne

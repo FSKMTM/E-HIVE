@@ -1,12 +1,14 @@
 package si.fs.kmtm.ehive.api.v1.viri;
 
 import com.kumuluz.ee.rest.beans.QueryParameters;
+import org.omg.CORBA.NameValuePair;
 import si.fs.kmtm.ehive.api.JPAServlet;
 import si.fs.kmtm.ehive.entitete.Meritev;
 import si.fs.kmtm.ehive.entitete.Podnica;
 import si.fs.kmtm.ehive.entitete.Tip;
 import si.fs.kmtm.ehive.storitve.dto.UrejanjeMeritevDto;
 import si.fs.kmtm.ehive.storitve.dto.UrejanjePodniceDto;
+import si.fs.kmtm.ehive.storitve.dto.ZadnjeMeritveDto;
 import si.fs.kmtm.ehive.storitve.zrna.MeritevZrno;
 import si.fs.kmtm.ehive.storitve.zrna.PodnicaZrno;
 import si.fs.kmtm.ehive.storitve.zrna.TipZrno;
@@ -18,6 +20,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -48,6 +52,21 @@ public class MeritevVir {
         return Response.status(Response.Status.OK).entity(meritve).header("X-Total-Count", meritevZrno.stMeritev(query)).build();
     }
 
+    @Path("/latest")
+    @GET
+    public Response vrniZadnjeMeritev() {
+        try {
+            int id = Integer.parseInt(uriInfo.getRequestUri().getQuery().split("=")[1]);
+            List<Meritev> meritve = meritevZrno.pridobiZadnjeMeritve(id);
+            return Response.status(Response.Status.OK).entity(meritve).build();
+        } catch (Exception e) {
+            logger.warning(e.toString());
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
+
+
+    }
+
     @Path("{id}")
     @GET
     public Response vrniMeritev(@PathParam("id") Integer meritevId) {
@@ -57,6 +76,7 @@ public class MeritevVir {
         }
         return Response.status(Response.Status.OK).entity(meritev).build();
     }
+
 
     @Path("{id}")
     @DELETE

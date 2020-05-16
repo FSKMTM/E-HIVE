@@ -6,7 +6,29 @@ import java.util.Calendar;
 import java.util.Date;
 
 @Entity(name="meritev")
-@NamedQuery(name="Meritev.getAll", query = "SELECT m FROM meritev m")
+@NamedQueries({
+    @NamedQuery(name="Meritev.getAll", query = "SELECT m FROM meritev m")
+})
+@SqlResultSetMapping(
+        name="LatestResults",
+//        columns={@ColumnResult(name="cas"),
+//                @ColumnResult(name="vrednost"),
+//                @ColumnResult(name="tip_koda")}
+        entities={
+                @EntityResult(
+                        entityClass = Meritev.class,
+                        fields={
+                                @FieldResult(name="cas_meritve",column="cas_meritve"),
+                                @FieldResult(name="vrednost", column="vrednost"),
+                                @FieldResult(name="tip_koda", column = "tip_koda"),
+                                @FieldResult(name="id", column = "id"),
+                                @FieldResult(name="podnica", column = "podnica")
+                        })}
+                )
+@NamedNativeQuery(
+        name = "Meritev.getLatest",
+        query = "SELECT m.cas_meritve, m.vrednost, m.tip_koda, m.id, m.podnica FROM (SELECT max(cas_meritve) AS cas, tip_koda FROM meritev GROUP BY tip_koda) t JOIN meritev m ON t.cas=m.cas_meritve AND t.tip_koda = m.tip_koda WHERE m.podnica = ?1",
+        resultSetMapping = "LatestResults")
 public class Meritev {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

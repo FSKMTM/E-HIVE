@@ -27,7 +27,7 @@ import java.util.Date;
                 )
 @NamedNativeQuery(
         name = "Meritev.getLatest",
-        query = "SELECT m.cas_meritve, m.vrednost, m.tip_koda, m.id, m.podnica FROM (SELECT max(cas_meritve) AS cas, tip_koda FROM meritev GROUP BY tip_koda) t JOIN meritev m ON t.cas=m.cas_meritve AND t.tip_koda = m.tip_koda WHERE m.podnica = ?1",
+        query = "SELECT m.cas_meritve, m.vrednost, m.tip_koda, m.id, m.podnica FROM (SELECT max(cas_meritve) AS cas, tip_koda FROM meritev m WHERE m.podnica = ?1 GROUP BY tip_koda) t JOIN meritev m ON t.cas=m.cas_meritve AND t.tip_koda = m.tip_koda",
         resultSetMapping = "LatestResults")
 public class Meritev {
     @Id

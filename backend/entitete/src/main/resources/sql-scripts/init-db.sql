@@ -18,3 +18,4 @@ INSERT INTO meritev (vrednost, tip_koda, cas_meritve, podnica) VALUES (70, 'VLA2
 INSERT INTO meritev (vrednost, tip_koda, cas_meritve, podnica) VALUES (75, 'VLA2', '2015-08-03 08:00:01', 1);
 INSERT INTO meritev (vrednost, tip_koda, cas_meritve, podnica) VALUES (40, 'TEZA', '2015-08-03 08:00:01', 1);
 INSERT INTO meritev (vrednost, tip_koda, cas_meritve, podnica) VALUES (41, 'TEZA', '2015-08-04 08:00:01', 1);
+INSERT INTO meritev (vrednost, tip_koda, cas_meritve, podnica) VALUES (5, 'TEZA', '2017-08-04 08:00:01', 2);

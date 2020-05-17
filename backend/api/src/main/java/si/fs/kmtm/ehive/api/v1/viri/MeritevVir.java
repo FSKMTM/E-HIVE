@@ -52,19 +52,13 @@ public class MeritevVir {
         return Response.status(Response.Status.OK).entity(meritve).header("X-Total-Count", meritevZrno.stMeritev(query)).build();
     }
 
-    @Path("/latest")
+    @Path("{podnica}/latest")
     @GET
-    public Response vrniZadnjeMeritev() {
-        try {
-            int id = Integer.parseInt(uriInfo.getRequestUri().getQuery().split("=")[1]);
-            List<Meritev> meritve = meritevZrno.pridobiZadnjeMeritve(id);
-            return Response.status(Response.Status.OK).entity(meritve).build();
-        } catch (Exception e) {
-            logger.warning(e.toString());
-            return Response.status(Response.Status.BAD_REQUEST).build();
-        }
+    //required id=:id in params
+    public Response vrniZadnjeMeritev(@PathParam("podnica") Integer podnicaId) {
 
-
+        List<Meritev> meritve = meritevZrno.pridobiZadnjeMeritve(podnicaId);
+        return Response.status(Response.Status.OK).entity(meritve).build();
     }
 
     @Path("{id}")

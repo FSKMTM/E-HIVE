@@ -80,7 +80,7 @@ export default {
   },
 	methods: {
 		pridobiZadnjeMeritve: function () {
-			fetch(global.restIp + "/meritve/latest?id=" + this.izbranaPodnica, {
+			fetch(global.restIp + "/meritve/" + this.izbranaPodnica + "/latest", {
 				method: "get"
 			})
 				.then((response) => {

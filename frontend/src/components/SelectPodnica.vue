@@ -1,5 +1,6 @@
 <template>
     <div>
+				<p>Izberite željeno podnico:</p>
         <b-form-select
             v-show="podnice.length"
             v-model="izbranaPodnica"

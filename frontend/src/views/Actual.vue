@@ -1,16 +1,6 @@
 <template>
 	<div>
 		<h3>Najnovejše meritve</h3>
-		<p>Izberite željeno podnico:</p>
-		<!-- <b-dropdown id="dropdown-1" text="Podnica" class="m-md-2">
-			<b-dropdown-item
-				v-show="podnice.length"
-				v-for="podnica in podnice"
-				:key="podnica.id"
-			>
-				{{ podnica.naziv }}
-			</b-dropdown-item> -->
-			<!-- </b-dropdown> -->
 			<div class="col col-sm-12 offset-sm-0 col-md-6 offset-md-3">
 				<SelectPodnica
 					v-if="podnice.length"

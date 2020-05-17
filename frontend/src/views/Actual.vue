@@ -12,15 +12,13 @@
 			</b-dropdown-item> -->
 			<!-- </b-dropdown> -->
 			<div class="col col-sm-12 offset-sm-0 col-md-6 offset-md-3">
-				<b-form-select
-					v-show="podnice.length"
-					v-model="izbranaPodnica"
-					:options="podnice"
-					value-field="id"
-					text-field="naziv"
-					@change="pridobiZadnjeMeritve"
-					>
-				</b-form-select>
+				<SelectPodnica
+					v-if="podnice.length"
+					@izbrana-podnica="izbranaPodnica"
+					:podnice="podnice"
+				>
+
+				</SelectPodnica>
 			</div>
 			<b-container class="actual-container">
 				<b-row>
@@ -47,14 +45,17 @@
 <script>
 import global from '@/global'
 import moment from 'moment'
+import SelectPodnica from '@/components/SelectPodnica'
 
 export default {
+	components: {
+    SelectPodnica
+  },
 	props: {
 		podnice: Array
 	},
 	data () {
     return {
-			izbranaPodnica: -1,
 			zadnjeMeritve: [],
 			fields: [
 				{
@@ -79,8 +80,8 @@ export default {
     }
   },
 	methods: {
-		pridobiZadnjeMeritve: function () {
-			fetch(global.restIp + "/meritve/" + this.izbranaPodnica + "/latest", {
+		pridobiZadnjeMeritve: function (id) {
+			fetch(global.restIp + "/meritve/" + id + "/latest", {
 				method: "get"
 			})
 				.then((response) => {
@@ -103,22 +104,13 @@ export default {
 			} else if (koda === "TEZA") {
 				return "Teža"
 			}
-		}
-	},
-	watch: {
-		podnice: function(newVal, oldVal) {
-			if (oldVal.length === 0) {
-				this.izbranaPodnica = newVal[0].id
-				this.pridobiZadnjeMeritve()
-			}
-		}
-	},
-	created: function() {
-		if (this.podnice.length) {
-			this.izbranaPodnica = this.podnice[0].id
-			this.pridobiZadnjeMeritve()
+		},
+
+		izbranaPodnica(id) {
+			this.pridobiZadnjeMeritve(id)
 		}
 	}
+
 
 }
 </script>

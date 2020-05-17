@@ -2,6 +2,7 @@ package si.fs.kmtm.ehive.api.v1;
 
 import com.kumuluz.ee.cors.annotations.CrossOrigin;
 
+import javax.persistence.Access;
 import javax.ws.rs.core.Application;
 
 import javax.ws.rs.ApplicationPath;

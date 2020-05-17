@@ -7,13 +7,11 @@ import java.util.Date;
 
 @Entity(name="meritev")
 @NamedQueries({
-    @NamedQuery(name="Meritev.getAll", query = "SELECT m FROM meritev m")
+    @NamedQuery(name="Meritev.getAll", query = "SELECT m FROM meritev m"),
+    @NamedQuery(name="Meritev.getSpecificPodnica", query = "SELECT m FROM meritev m WHERE m.podnica = ?1")
 })
 @SqlResultSetMapping(
         name="LatestResults",
-//        columns={@ColumnResult(name="cas"),
-//                @ColumnResult(name="vrednost"),
-//                @ColumnResult(name="tip_koda")}
         entities={
                 @EntityResult(
                         entityClass = Meritev.class,

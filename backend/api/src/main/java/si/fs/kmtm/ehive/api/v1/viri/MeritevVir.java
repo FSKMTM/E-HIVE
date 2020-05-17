@@ -49,12 +49,14 @@ public class MeritevVir {
     public Response vrniMeritve() {
         QueryParameters query = QueryParameters.query(uriInfo.getRequestUri().getQuery()).build();
         List<Meritev> meritve = meritevZrno.pridobiMeritve(query);
-        return Response.status(Response.Status.OK).entity(meritve).header("X-Total-Count", meritevZrno.stMeritev(query)).build();
+        return Response.status(Response.Status.OK).entity(meritve)
+                .header("Access-Control-Expose-Headers", "X-Total-Count")
+                .header("X-Total-Count", meritevZrno.stMeritev(query))
+                .build();
     }
 
     @Path("{podnica}/latest")
     @GET
-    //required id=:id in params
     public Response vrniZadnjeMeritev(@PathParam("podnica") Integer podnicaId) {
 
         List<Meritev> meritve = meritevZrno.pridobiZadnjeMeritve(podnicaId);
@@ -70,6 +72,18 @@ public class MeritevVir {
         }
         return Response.status(Response.Status.OK).entity(meritev).build();
     }
+
+    //!!! id je od podnice, ne meritev
+//    @Path("/podnica/{id}")
+//    @GET
+//    public Response vrniMeritevZaPodnico(@PathParam("id") Integer podnicaId) {
+//        Podnica podnica = podnicaZrno.pridobiPodnico(podnicaId);
+//        if (podnica == null) {
+//            return Response.status(Response.Status.BAD_REQUEST).build();
+//        }
+//        List<Meritev> meritve = meritevZrno.pridobiMeritevZaPodnico(podnica);
+//        return Response.status(Response.Status.OK).entity(meritve).build();
+//    }
 
 
     @Path("{id}")

@@ -3,6 +3,7 @@ package si.fs.kmtm.ehive.storitve.zrna;
 import com.kumuluz.ee.rest.beans.QueryParameters;
 import com.kumuluz.ee.rest.utils.JPAUtils;
 import si.fs.kmtm.ehive.entitete.Meritev;
+import si.fs.kmtm.ehive.entitete.Podnica;
 
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.*;
@@ -32,6 +33,11 @@ public class MeritevZrno {
     public Long stMeritev(QueryParameters query) {
         Long count = JPAUtils.queryEntitiesCount(em, Meritev.class, query);
         return count;
+    }
+
+    public List<Meritev> pridobiMeritevZaPodnico(Podnica podnica) {
+        Query q = em.createNamedQuery("Meritev.getSpecificPodnica").setParameter(1, podnica);
+        return q.getResultList();
     }
 
     public List<Meritev> pridobiMeritve() {

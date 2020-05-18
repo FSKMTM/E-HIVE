@@ -22,18 +22,54 @@
                 </b-form-group>
 
                 <b-form-group id="input-group-tip" v-if="tipi.length" label="Izberi tip meritve:">
-                    <b-form-checkbox-group v-model="form.checked" id="checkboxes-tip">
+                    <b-form-checkbox-group
+											v-model="form.checked"
+											id="checkboxes-tip"
+
+										>
 											<b-form-checkbox
-											v-for="tip in tipi"
-											:key="tip.koda"
-											:value="tip.koda">{{ tip.ime }}</b-form-checkbox>
+												v-for="tip in tipi"
+												:key="tip.koda"
+												:value="tip.koda"
+											>
+													{{ tip.ime }}
+											</b-form-checkbox>
                     </b-form-checkbox-group>
                 </b-form-group>
+								<!-- <div class="container datepicker-container"> -->
+									<div class="row">
+										<div class="col col-12 col-md-6">
+											<b-form-group label="Od:">
+												<DatePicker
+													type="datetime"
+													v-model="dateFromWithDefault"
+													:show-second="datepicker.showSecond"
+													:format="datepicker.format"
+													class="datepicker"
+												>
+												</DatePicker>
+											</b-form-group>
+										</div>
+										<div class="col col-12 col-md-6">
+											<b-form-group label="Do:">
+												<DatePicker
+													type="datetime"
+													v-model="dateToWithDefault"
+													:show-second="datepicker.showSecond"
+													:format="datepicker.format"
+													class="datepicker"
+												>
+												</DatePicker>
+											</b-form-group>
+										</div>
+									</div>
+								<!-- </div> -->
+
 
                 <b-button type="submit" variant="primary">Poišči meritve</b-button>
                 </b-form>
         </div>
-        <b-container class="actual-container">
+        <b-container class="measurements-container">
             <b-row>
                 <b-col cols="12">
                     <b-table
@@ -62,8 +98,14 @@
 <script>
 import global from '@/global'
 import moment from 'moment'
+import DatePicker from 'vue2-datepicker'
+import 'vue2-datepicker/index.css'
+import 'vue2-datepicker/locale/sl'
 
 export default {
+	components: {
+    DatePicker
+  },
 	props: {
 		podnice: Array
 	},
@@ -75,6 +117,13 @@ export default {
 			offset: 0,
 			naloziVec: true,
 			totalCount: 100,
+			datepicker: {
+				datetimeFrom: null,
+				datetimeTo: null,
+				showSecond: false,
+				format: 'DD. MM. YYYY, HH:mm'
+			},
+
 			form: {
           indeksIzbranePodnice: -1,
           checked: []
@@ -95,7 +144,7 @@ export default {
 					key: "cas_meritve",
 					label: "Čas",
 					formatter: value => {
-						return moment(value, "YYYY-MM-DDThh:mm:ssTZD").format('DD. MM. YYYY, hh:mm:ss')
+						return moment(value, "YYYY-MM-DDThh:mm:ssTZD").format('DD. MM. YYYY, HH:mm:ss')
 					}
 				}
 			]
@@ -150,6 +199,24 @@ export default {
 		}
 
 	},
+	computed: {
+    dateFromWithDefault: {
+      get() {
+        return this.datepicker.datetime || moment().subtract(1, 'months').toDate()
+      },
+      set(val) {
+        this.datepicker.datetime = val
+      }
+		},
+		dateToWithDefault: {
+      get() {
+        return this.datepicker.datetime || moment().toDate()
+      },
+      set(val) {
+        this.datepicker.datetime = val
+      }
+		}
+  },
 	created: function () {
     fetch(global.restIp + "/tipi", {
       method: "get"
@@ -171,8 +238,15 @@ export default {
 </script>
 
 <style scoped>
-.actual-container {
+.datepicker {
+	width: 100%
+}
+.measurements-container {
 	margin-top:30px;
 }
+/* .datepicker-container {
+	margin: 0px
+} */
+
 </style>
 

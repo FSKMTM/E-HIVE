@@ -3,10 +3,11 @@ package si.fs.kmtm.ehive.storitve.dto;
 import si.fs.kmtm.ehive.entitete.Tip;
 
 import java.util.Calendar;
+import java.util.Date;
 
 public class UrejanjeMeritevDto {
 
-    private Calendar cas_meritve;
+    private Date cas_meritve;
 
     private float vrednost;
 
@@ -14,11 +15,11 @@ public class UrejanjeMeritevDto {
 
     private String tip_id;
 
-    public Calendar getCas_meritve() {
+    public Date getCas_meritve() {
         return cas_meritve;
     }
 
-    public void setCas_meritve(Calendar cas_meritve) {
+    public void setCas_meritve(Date cas_meritve) {
         this.cas_meritve = cas_meritve;
     }
 

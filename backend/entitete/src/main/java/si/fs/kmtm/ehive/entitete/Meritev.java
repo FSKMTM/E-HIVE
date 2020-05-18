@@ -38,7 +38,7 @@ public class Meritev {
     private Tip tip;
 
 //    @Temporal(TemporalType.TIMESTAMP)
-    private Calendar cas_meritve;
+    private Date cas_meritve;
 
     @ManyToOne
     @JoinColumn(name = "podnica")
@@ -68,11 +68,11 @@ public class Meritev {
         this.tip = tip;
     }
 
-    public Calendar getCas_meritve() {
+    public Date getCas_meritve() {
         return cas_meritve;
     }
 
-    public void setCas_meritve(Calendar cas_meritve) {
+    public void setCas_meritve(Date cas_meritve) {
         this.cas_meritve = cas_meritve;
     }
 

@@ -63,7 +63,7 @@ export default {
 					key: "cas_meritve",
 					label: "Čas",
 					formatter: value => {
-						return moment(value, "YYYY-MM-DDThh:mm:ssTZD").format('DD. MM. YYYY, hh:mm:ss')
+						return moment(value, "YYYY-MM-DDThh:mm:ssTZD").format('DD. MM. YYYY, HH:mm:ss')
 					}
 				}
 			]

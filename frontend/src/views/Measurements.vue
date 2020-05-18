@@ -42,7 +42,7 @@
 											<b-form-group label="Od:">
 												<DatePicker
 													type="datetime"
-													v-model="dateFromWithDefault"
+													v-model="datepicker.datetimeFrom"
 													:show-second="datepicker.showSecond"
 													:format="datepicker.format"
 													class="datepicker"
@@ -54,7 +54,7 @@
 											<b-form-group label="Do:">
 												<DatePicker
 													type="datetime"
-													v-model="dateToWithDefault"
+													v-model="datepicker.datetimeTo"
 													:show-second="datepicker.showSecond"
 													:format="datepicker.format"
 													class="datepicker"
@@ -80,6 +80,11 @@
                         v-if="meritve.length"
                     >
                     </b-table>
+										<p
+											v-else-if="vsajEnoPridobivanjeMeritev"
+										>
+											Nobena meritev ne ustreza iskalni zahtevi
+										</p>
                 </b-col>
             </b-row>
         </b-container>
@@ -117,6 +122,7 @@ export default {
 			offset: 0,
 			naloziVec: true,
 			totalCount: 100,
+			vsajEnoPridobivanjeMeritev: false,
 			datepicker: {
 				datetimeFrom: null,
 				datetimeTo: null,
@@ -144,7 +150,7 @@ export default {
 					key: "cas_meritve",
 					label: "Čas",
 					formatter: value => {
-						return moment(value, "YYYY-MM-DDThh:mm:ssTZD").format('DD. MM. YYYY, HH:mm:ss')
+						return moment(value, "YYYY-MM-DDTHH:mm:ssTZD").format('DD. MM. YYYY, HH:mm:ss')
 					}
 				}
 			]
@@ -162,6 +168,7 @@ export default {
 				})
 				.then((jsonData) => {
 					console.log(jsonData)
+					this.vsajEnoPridobivanjeMeritev = true
 					this.offset += this.limit
 					this.meritve.push.apply(this.meritve, jsonData)
 					if (this.meritve.length === this.totalCount) {
@@ -190,34 +197,25 @@ export default {
 			this.pridobiMeritve()
 		},
 		iskalniNiz() {
-			return "filter=podnica.id:EQ:" + this.form.indeksIzbranePodnice + " tip.koda:IN:[" + this.form.checked + "]"
+			return "filter=podnica.id:EQ:" + this.form.indeksIzbranePodnice + " tip.koda:IN:[" + this.form.checked + "]" + " cas_meritve:LTE:'" + this.encodeDate(this.datepicker.datetimeTo) + "'" + " cas_meritve:GTE:'" + this.encodeDate(this.datepicker.datetimeFrom) + "'"
+		},
+		encodeDate(date) {
+			return moment(date).format("YYYY-MM-DDThh:mm:ssZ").replace("+", "%2B")
 		},
 		search() {
 			this.offset = 0
 			this.meritve = []
 			this.pridobiMeritve()
+		},
+		setDatepickerFrom(val) {
+			this.datepicker.datetimeFrom = val
 		}
 
 	},
-	computed: {
-    dateFromWithDefault: {
-      get() {
-        return this.datepicker.datetime || moment().subtract(1, 'months').toDate()
-      },
-      set(val) {
-        this.datepicker.datetime = val
-      }
-		},
-		dateToWithDefault: {
-      get() {
-        return this.datepicker.datetime || moment().toDate()
-      },
-      set(val) {
-        this.datepicker.datetime = val
-      }
-		}
-  },
+
 	created: function () {
+		this.datepicker.datetimeFrom = moment().subtract(30, "days").toDate()
+		this.datepicker.datetimeTo = moment().toDate()
     fetch(global.restIp + "/tipi", {
       method: "get"
     })

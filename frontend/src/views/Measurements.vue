@@ -8,6 +8,12 @@
                 :podnice="podnice"
             >
             </SelectPodnica> -->
+						<b-alert
+							:show="manjkajocePolje"
+							variant="danger"
+						>
+							Izpolnite vsa polja!
+						</b-alert>
             <b-form @submit.prevent="search" >
 
                 <b-form-group id="input-group-podnica" label="Izberi iskano podnico:" label-for="podnica">
@@ -123,6 +129,7 @@ export default {
 			naloziVec: true,
 			totalCount: 100,
 			vsajEnoPridobivanjeMeritev: false,
+			manjkajocePolje: false,
 			datepicker: {
 				datetimeFrom: null,
 				datetimeTo: null,
@@ -158,7 +165,6 @@ export default {
   },
 	methods: {
 		pridobiMeritve: function () {
-			console.log(global.restIp + "/meritve?" + this.iskalniNiz() + "&limit=" + this.limit + "&offset=" + this.offset + "&order=cas_meritve DESC")
 			fetch(global.restIp + "/meritve?" + this.iskalniNiz() + "&limit=" + this.limit + "&offset=" + this.offset + "&order=cas_meritve DESC", {
 				method: "get"
 			})
@@ -203,14 +209,15 @@ export default {
 			return moment(date).format("YYYY-MM-DDThh:mm:ssZ").replace("+", "%2B")
 		},
 		search() {
-			this.offset = 0
-			this.meritve = []
-			this.pridobiMeritve()
-		},
-		setDatepickerFrom(val) {
-			this.datepicker.datetimeFrom = val
+			if (this.form.checked.length === 0 || this.indeksIzbranePodnice < 0 || this.datepicker.datetimeFrom === null || this.datepicker.datetimeTo === null) {
+				this.manjkajocePolje = true
+			} else {
+				this.manjkajocePolje = false
+				this.offset = 0
+				this.meritve = []
+				this.pridobiMeritve()
+			}
 		}
-
 	},
 
 	created: function () {

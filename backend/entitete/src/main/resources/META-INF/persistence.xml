@@ -6,6 +6,7 @@
         <class>si.fs.kmtm.ehive.entitete.Podnica</class>
         <class>si.fs.kmtm.ehive.entitete.Tip</class>
         <class>si.fs.kmtm.ehive.entitete.Meritev</class>
+        <class>si.fs.kmtm.ehive.entitete.Varoa</class>
 
         <properties>
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>

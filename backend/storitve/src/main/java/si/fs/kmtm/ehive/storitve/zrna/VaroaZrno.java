@@ -32,14 +32,16 @@ public class VaroaZrno {
         return varoa.getIme_datoteke();
     }
 
-    public PridobiVaroaDto pridobiZadnjoSliko(int podnica) {
+    public List<Varoa> pridobi(QueryParameters query){
+        List<Varoa> najnovejse = JPAUtils.queryEntities(em, Varoa.class, query);
+        return najnovejse;
+    }
+
+    public PridobiVaroaDto pridobiZadnjoSliko(QueryParameters query) {
 //        Query q = em.createNamedQuery("Varoa.getLatest").setParameter(1,podnica);
 //        q.setMaxResults(1);
 //        List<Varoa> najnovejse = q.getResultList();
-        QueryParameters parameters = new QueryParameters();
-        QueryFilter podnicaFilter = new QueryFilter("podnica", FilterOperation.EQ, podnica+"");
-        parameters.getFilters().add(podnicaFilter);
-        List<Varoa> najnovejse = JPAUtils.queryEntities(em, Varoa.class, parameters);
+        List<Varoa> najnovejse = JPAUtils.queryEntities(em, Varoa.class, query);
         if (najnovejse.size() == 0) {
             return null;
         } else {

@@ -1,7 +1,9 @@
 package si.fs.kmtm.ehive.api.v1.viri;
 
 import com.kumuluz.ee.cors.annotations.CrossOrigin;
+import com.kumuluz.ee.rest.beans.QueryParameters;
 import si.fs.kmtm.ehive.entitete.Podnica;
+import si.fs.kmtm.ehive.entitete.Varoa;
 import si.fs.kmtm.ehive.storitve.dto.PridobiVaroaDto;
 import si.fs.kmtm.ehive.storitve.zrna.PodnicaZrno;
 import si.fs.kmtm.ehive.storitve.zrna.VaroaZrno;
@@ -15,7 +17,9 @@ import javax.ws.rs.core.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @CrossOrigin(supportedMethods = "GET, POST, HEAD, OPTIONS, DELETE")
 @Path("varoa")
@@ -30,7 +34,7 @@ public class VaroaVir {
     PodnicaZrno podnicaZrno;
 
     @Context
-    private UriInfo context;
+    private UriInfo uriInfo;
 
     @Consumes(MediaType.WILDCARD)
     @POST
@@ -52,39 +56,21 @@ public class VaroaVir {
     }
 
 
-//    private String getFileName(MultivaluedMap<String, String> header) {
-//
-//        String[] contentDisposition = header.getFirst("Content-Disposition").split(";");
-//
-//        for (String filename : contentDisposition) {
-//            if ((filename.trim().startsWith("filename"))) {
-//                String[] name = filename.split("=");
-//                String finalFileName = name[1].trim().replaceAll("\"", "");
-//                return finalFileName;
-//            }
-//        }
-//        return "unknown";
-//    }
-
-
     @GET
-    @Path("/{podnica}/latest")
+    @Path("/latest")
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
-    public Response najnovejsaVaroa(@PathParam("podnica") Integer podnicaId) {
-//        System.out.println(context.getAbsolutePath());
-        Podnica podnica = podnicaZrno.pridobiPodnico(podnicaId);
-        if (podnica == null) {
-            return Response.status(Response.Status.BAD_REQUEST).entity("{\"sporocilo\":\"Napačni id podnice\"}").build();
-        }
-        PridobiVaroaDto dto = varoaZrno.pridobiZadnjoSliko(podnicaId);
+    public Response najnovejsaVaroa() {
+        QueryParameters query = QueryParameters.query(uriInfo.getRequestUri().getQuery()).build();
+        PridobiVaroaDto dto = varoaZrno.pridobiZadnjoSliko(query);
         if (dto == null) {
             return Response.status(Response.Status.NOT_FOUND).entity("{\"sporocilo\":\"Ta slika ne obstaja\"}").build();
         }
         return Response.ok(dto.getSlika(), MediaType.APPLICATION_OCTET_STREAM)
-                .header("Content-Disposition", "inline")
-                .header("Filename", dto.getIme_datoteke())
-                .header("Created", dto.getUstvarjeno()+"")
+                .header("Access-Control-Expose-Headers", "*")
+                .header("Content-Disposition", "inline; filename=\"" + dto.getIme_datoteke() + "\"")
+                .header("Created", new SimpleDateFormat("d. MM. YYYY, HH:mm:ss").format(dto.getUstvarjeno()))
                 .build();
+
     }
 
 

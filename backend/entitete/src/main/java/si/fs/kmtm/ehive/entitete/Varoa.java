@@ -50,7 +50,7 @@ public class Varoa {
     }
 
     public File pridobiSlikaFile() {
-        return new File("slike/" + id + "/" + ime_datoteke);
+        return new File("slike/" + podnica.getId() + "/" + ime_datoteke);
     }
 
     public BufferedImage pridobiSliko() {

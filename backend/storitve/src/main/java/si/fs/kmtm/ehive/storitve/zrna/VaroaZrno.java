@@ -1,14 +1,23 @@
 package si.fs.kmtm.ehive.storitve.zrna;
 
+import com.kumuluz.ee.rest.beans.QueryFilter;
+import com.kumuluz.ee.rest.beans.QueryParameters;
+import com.kumuluz.ee.rest.enums.FilterOperation;
+import com.kumuluz.ee.rest.utils.JPAUtils;
+import si.fs.kmtm.ehive.entitete.Meritev;
 import si.fs.kmtm.ehive.entitete.Podnica;
 import si.fs.kmtm.ehive.entitete.Varoa;
+import si.fs.kmtm.ehive.storitve.dto.PridobiVaroaDto;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.Date;
+import java.util.List;
 
 @ApplicationScoped
 public class VaroaZrno {
@@ -23,17 +32,29 @@ public class VaroaZrno {
         return varoa.getIme_datoteke();
     }
 
-//    public File datotekaSlikeKarte(String imeSlike) {
-//        QueryParameters parameters = new QueryParameters();
-//        QueryFilter nameFilter = new QueryFilter("imeSlike", FilterOperation.EQ, imeSlike);
-//        parameters.getFilters().add(nameFilter);
-//        List<Slika> slike = JPAUtils.queryEntities(em, Slika.class, parameters);
-//        if (slike == null || slike.size() == 0)
-//            return null;
-//        Slika slika = slike.get(0);
-//        if (slika == null) {
-//            return null;
-//        }
-//        return slika.getSlikaFile();
-//    }
+    public PridobiVaroaDto pridobiZadnjoSliko(int podnica) {
+//        Query q = em.createNamedQuery("Varoa.getLatest").setParameter(1,podnica);
+//        q.setMaxResults(1);
+//        List<Varoa> najnovejse = q.getResultList();
+        QueryParameters parameters = new QueryParameters();
+        QueryFilter podnicaFilter = new QueryFilter("podnica", FilterOperation.EQ, podnica+"");
+        parameters.getFilters().add(podnicaFilter);
+        List<Varoa> najnovejse = JPAUtils.queryEntities(em, Varoa.class, parameters);
+        if (najnovejse.size() == 0) {
+            return null;
+        } else {
+            Varoa varoa = najnovejse.get(0);
+            if (varoa == null) {
+                return null;
+            }
+            File slika =  varoa.pridobiSlikaFile();
+            PridobiVaroaDto dto = new PridobiVaroaDto();
+            dto.setIme_datoteke(varoa.getIme_datoteke());
+            dto.setUstvarjeno(varoa.getCas_meritve());
+            dto.setSlika(slika);
+            return dto;
+
+        }
+    }
+
 }

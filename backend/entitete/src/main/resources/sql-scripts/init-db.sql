@@ -21,3 +21,9 @@ INSERT INTO meritev (vrednost, tip_koda, cas_meritve, podnica) VALUES (75, 'VLA2
 INSERT INTO meritev (vrednost, tip_koda, cas_meritve, podnica) VALUES (40, 'TEZA', '2015-08-03 08:00:01', 1);
 INSERT INTO meritev (vrednost, tip_koda, cas_meritve, podnica) VALUES (41, 'TEZA', '2015-08-04 08:00:01', 1);
 INSERT INTO meritev (vrednost, tip_koda, cas_meritve, podnica) VALUES (5, 'TEZA', '2017-08-04 08:00:01', 2);
+
+INSERT INTO varoa(cas_meritve, podnica, ime_datoteke) VALUES ('2020-05-07 15:00:01', 1, '1lcgv7BngabNUVNS7GzfIFr2ETVGuBhcRRTNark9BFI8VaAAZl.jpg');
+INSERT INTO varoa(cas_meritve, podnica, ime_datoteke) VALUES ('2020-05-07 17:00:01', 1, '2lOgS1V8NDjroaRJB2MZkf7NrVkTDhDJcf4FZFjfShz5Ea6fHRE.jpg');
+INSERT INTO varoa(cas_meritve, podnica, ime_datoteke) VALUES ('2020-05-07 13:00:01', 2, '84p7MdiaCdM65PNU5k1A88iFt9eBuncKT46fFVbsngCLN02GtM.jpg');
+INSERT INTO varoa(cas_meritve, podnica, ime_datoteke) VALUES ('2020-05-07 10:00:01', 1, 'hSc6IkPjt5fMMrL4m11PnnhlgH8pKiHvf2VDaBOIKN2j4sjUpo.jpg');
+INSERT INTO varoa(cas_meritve, podnica, ime_datoteke) VALUES ('2020-04-07 15:00:01', 1, 'J3maurfUE8ODpG1EB7NhZnd3iCUe4ul7c123ocC0IlTFru2F4A.jpg');

@@ -2,6 +2,7 @@ package si.fs.kmtm.ehive.api.v1.viri;
 
 import com.kumuluz.ee.cors.annotations.CrossOrigin;
 import si.fs.kmtm.ehive.entitete.Podnica;
+import si.fs.kmtm.ehive.storitve.dto.PridobiVaroaDto;
 import si.fs.kmtm.ehive.storitve.zrna.PodnicaZrno;
 import si.fs.kmtm.ehive.storitve.zrna.VaroaZrno;
 
@@ -51,34 +52,40 @@ public class VaroaVir {
     }
 
 
-    private String getFileName(MultivaluedMap<String, String> header) {
-
-        String[] contentDisposition = header.getFirst("Content-Disposition").split(";");
-
-        for (String filename : contentDisposition) {
-            if ((filename.trim().startsWith("filename"))) {
-                String[] name = filename.split("=");
-                String finalFileName = name[1].trim().replaceAll("\"", "");
-                return finalFileName;
-            }
-        }
-        return "unknown";
-    }
-
-
-//    @GET
-//    @Path("/{imeSlike}")
-//    @Produces(MediaType.APPLICATION_OCTET_STREAM)
-//    public Response slikaKarte(@PathParam("imeSlike") String imeSlike) {
-//        System.out.println(context.getAbsolutePath());
-//        File slika = slikeZrno.datotekaSlikeKarte(imeSlike);
-//        if (slika == null) {
-//            return Response.status(Response.Status.NOT_FOUND).entity("{\"sporocilo\":\"Ta slika ne obstaja\"}").build();
+//    private String getFileName(MultivaluedMap<String, String> header) {
+//
+//        String[] contentDisposition = header.getFirst("Content-Disposition").split(";");
+//
+//        for (String filename : contentDisposition) {
+//            if ((filename.trim().startsWith("filename"))) {
+//                String[] name = filename.split("=");
+//                String finalFileName = name[1].trim().replaceAll("\"", "");
+//                return finalFileName;
+//            }
 //        }
-//        return Response.ok(slika, MediaType.APPLICATION_OCTET_STREAM)
-//                .header("Content-Disposition", "inline; filename=\"" + slika.getName() + "\"" )
-//                .build();
+//        return "unknown";
 //    }
+
+
+    @GET
+    @Path("/{podnica}/latest")
+    @Produces(MediaType.APPLICATION_OCTET_STREAM)
+    public Response najnovejsaVaroa(@PathParam("podnica") Integer podnicaId) {
+//        System.out.println(context.getAbsolutePath());
+        Podnica podnica = podnicaZrno.pridobiPodnico(podnicaId);
+        if (podnica == null) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("{\"sporocilo\":\"Napačni id podnice\"}").build();
+        }
+        PridobiVaroaDto dto = varoaZrno.pridobiZadnjoSliko(podnicaId);
+        if (dto == null) {
+            return Response.status(Response.Status.NOT_FOUND).entity("{\"sporocilo\":\"Ta slika ne obstaja\"}").build();
+        }
+        return Response.ok(dto.getSlika(), MediaType.APPLICATION_OCTET_STREAM)
+                .header("Content-Disposition", "inline")
+                .header("Filename", dto.getIme_datoteke())
+                .header("Created", dto.getUstvarjeno()+"")
+                .build();
+    }
 
 
 

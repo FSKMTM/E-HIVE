@@ -9,6 +9,10 @@ import java.util.Date;
 import java.util.Random;
 
 @Entity(name="varoa")
+@NamedQueries({
+        @NamedQuery(name="Varoa.getAll", query = "SELECT v FROM varoa v"),
+        @NamedQuery(name="Varoa.getLatest", query = "SELECT v.cas_meritve, v.ime_datoteke FROM varoa v WHERE v.podnica = ?1 ORDER BY v.cas_meritve DESC")
+})
 public class Varoa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -165,6 +165,7 @@ export default {
   },
 	methods: {
 		pridobiMeritve: function () {
+			console.log(this.iskalniNiz())
 			fetch(global.restIp + "/meritve?" + this.iskalniNiz() + "&limit=" + this.limit + "&offset=" + this.offset + "&order=cas_meritve DESC", {
 				method: "get"
 			})

@@ -23,7 +23,22 @@
 						</b-table>
 					</b-col>
 					<b-col cols="12" md="6">
-						<b-img src="https://picsum.photos/600/300/?image=41" fluid alt="Fluid image"></b-img>
+						<div v-if="src">
+							<p>Posneto: {{varoa_ustvarjena}} </p>
+							<b-img
+							:src="src"
+							fluid alt="Dnevni odpad varoe"
+							></b-img>
+
+						</div>
+
+						<p v-else-if="tezave_slika">
+							Pri nalaganju slike je prišlo do težave.
+						</p>
+						<img
+							v-else
+							src="../assets/loader.gif"
+						>
 					</b-col>
 				</b-row>
 			</b-container>
@@ -39,7 +54,7 @@ import SelectPodnica from '@/components/SelectPodnica'
 
 export default {
 	components: {
-    SelectPodnica
+		SelectPodnica
   },
 	props: {
 		podnice: Array
@@ -47,6 +62,9 @@ export default {
 	data () {
     return {
 			zadnjeMeritve: [],
+			src: "",
+			tezave_slika: false,
+			varoa_ustvarjena: "",
 			fields: [
 				{
 					key: "tip.koda",
@@ -82,6 +100,33 @@ export default {
 					this.zadnjeMeritve = jsonData
 				})
 		},
+		pridobiZadnjoVaroo: function(id) {
+			fetch(global.restIp + "/varoa/latest?filter=podnica.id:EQ:" + id + "&order=cas_meritve DESC", {
+				headers: {
+						'Content-Disposition': 'inline'
+					},
+					responseType: 'blob',
+					method: "get"
+			})
+				.then((response) => {
+					if (response.ok) {
+						this.varoa_ustvarjena = response.headers.get('created')
+						this.tezave_slika = false
+						return new Response(response.body)
+					} else {
+						this.tezave_slika = true
+					}
+					})
+					.then(response => response.blob())
+					.then(blob => URL.createObjectURL(blob))
+					.then(url => {
+						this.src = url
+					})
+					.catch(err => {
+						console.error(err)
+						this.tezave_slika = true
+					})
+		},
 		pridobiImeMeritve: function(koda) {
 			if (koda === "TEMP1") {
 				return "Zunanja temperatura"
@@ -98,6 +143,7 @@ export default {
 
 		izbranaPodnica(id) {
 			this.pridobiZadnjeMeritve(id)
+			this.pridobiZadnjoVaroo(id)
 		}
 	}
 

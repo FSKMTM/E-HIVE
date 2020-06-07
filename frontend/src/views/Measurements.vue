@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<b-container class="measurements-container">
 		<h3>Vse meritve</h3>
         <div class="col col-sm-12 offset-sm-0 col-md-10 offset-md-1">
             <!-- <SelectPodnica
@@ -103,7 +103,7 @@
         >
         </scroll-loader>
 
-	</div>
+	</b-container>
 </template>
 
 <script>

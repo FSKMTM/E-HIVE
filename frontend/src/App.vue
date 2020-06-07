@@ -4,9 +4,9 @@
       <Topbar></Topbar>
     </div>
     <div>
-      <b-container class="app-container">
+      <div class="app-container">
         <router-view :podnice="podnice"></router-view>
-      </b-container>
+      </div>
     </div>
   </div>
 </template>
@@ -49,8 +49,7 @@ export default {
 /* h2 {
   text-align: left;
 } */
-.app-container {
-  margin-top:10px;
-}
+
+
 
 </style>

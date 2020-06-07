@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<b-container class="actual-container">
 		<h3>Najnovejše meritve</h3>
 			<div class="col col-sm-12 offset-sm-0 col-md-6 offset-md-3">
 				<SelectPodnica
@@ -44,7 +44,7 @@
 			</b-container>
 
 
-	</div>
+	</b-container>
 </template>
 
 <script>

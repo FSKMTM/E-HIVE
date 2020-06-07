@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<b-container class="varoa-container">
 		<h3>Dnevni odpad varoe</h3>
         <div class="col col-sm-12 offset-sm-0 col-md-10 offset-md-1">
 					<div class="col col-12 col-md-6 offset-md-3">
@@ -83,7 +83,7 @@
         </b-container>
 
 
-	</div>
+	</b-container>
 </template>
 <script>
 import global from '@/global'
@@ -193,6 +193,7 @@ export default {
 }
 .varoa-container {
 	margin-top:30px;
+	margin-bottom:30px;
 }
 
 </style>

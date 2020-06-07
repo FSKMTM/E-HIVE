@@ -207,7 +207,7 @@ export default {
 			return "filter=podnica.id:EQ:" + this.form.indeksIzbranePodnice + " tip.koda:IN:[" + this.form.checked + "]" + " cas_meritve:LTE:'" + this.encodeDate(this.datepicker.datetimeTo) + "'" + " cas_meritve:GTE:'" + this.encodeDate(this.datepicker.datetimeFrom) + "'"
 		},
 		encodeDate(date) {
-			return moment(date).format("YYYY-MM-DDThh:mm:ssZ").replace("+", "%2B")
+			return moment(date).format("YYYY-MM-DDTHH:mm:ssZ").replace("+", "%2B")
 		},
 		search() {
 			if (this.form.checked.length === 0 || this.indeksIzbranePodnice < 0 || this.datepicker.datetimeFrom === null || this.datepicker.datetimeTo === null) {

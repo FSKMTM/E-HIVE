@@ -24,7 +24,7 @@
 					</b-col>
 					<b-col cols="12" md="6">
 						<div v-if="src">
-							<p>Posneto: {{varoa_ustvarjena}} </p>
+							<p>Posneto ob: {{varoa_ustvarjena}} </p>
 							<b-img
 							:src="src"
 							fluid alt="Dnevni odpad varoe"
@@ -101,7 +101,7 @@ export default {
 				})
 		},
 		pridobiZadnjoVaroo: function(id) {
-			fetch(global.restIp + "/varoa/latest?filter=podnica.id:EQ:" + id + "&order=cas_meritve DESC", {
+			fetch(global.restIp + "/varoa?filter=podnica.id:EQ:" + id + "&order=cas_meritve DESC&limit=1", {
 				headers: {
 						'Content-Disposition': 'inline'
 					},

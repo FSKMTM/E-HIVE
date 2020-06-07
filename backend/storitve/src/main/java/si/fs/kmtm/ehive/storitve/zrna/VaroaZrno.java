@@ -37,10 +37,29 @@ public class VaroaZrno {
         return najnovejse;
     }
 
-    public PridobiVaroaDto pridobiZadnjoSliko(QueryParameters query) {
-//        Query q = em.createNamedQuery("Varoa.getLatest").setParameter(1,podnica);
-//        q.setMaxResults(1);
-//        List<Varoa> najnovejse = q.getResultList();
+//    public PridobiVaroaDto pridobiZadnjoSliko(QueryParameters query) {
+////        Query q = em.createNamedQuery("Varoa.getLatest").setParameter(1,podnica);
+////        q.setMaxResults(1);
+////        List<Varoa> najnovejse = q.getResultList();
+//        List<Varoa> najnovejse = JPAUtils.queryEntities(em, Varoa.class, query);
+//        if (najnovejse.size() == 0) {
+//            return null;
+//        } else {
+//            Varoa varoa = najnovejse.get(0);
+//            if (varoa == null) {
+//                return null;
+//            }
+//            File slika =  varoa.pridobiSlikaFile();
+//            PridobiVaroaDto dto = new PridobiVaroaDto();
+//            dto.setIme_datoteke(varoa.getIme_datoteke());
+//            dto.setUstvarjeno(varoa.getCas_meritve());
+//            dto.setSlika(slika);
+//            return dto;
+//
+//        }
+//    }
+
+    public PridobiVaroaDto pridobiSliko(QueryParameters query) {
         List<Varoa> najnovejse = JPAUtils.queryEntities(em, Varoa.class, query);
         if (najnovejse.size() == 0) {
             return null;
@@ -57,6 +76,10 @@ public class VaroaZrno {
             return dto;
 
         }
+    }
+    public Long stMeritev(QueryParameters query) {
+        Long count = JPAUtils.queryEntitiesCount(em, Varoa.class, query);
+        return count;
     }
 
 }

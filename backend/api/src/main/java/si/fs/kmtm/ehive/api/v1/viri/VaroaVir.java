@@ -56,19 +56,40 @@ public class VaroaVir {
     }
 
 
+//    @GET
+//    @Path("/latest")
+//    @Produces(MediaType.APPLICATION_OCTET_STREAM)
+//    public Response najnovejsaVaroa() {
+//        QueryParameters query = QueryParameters.query(uriInfo.getRequestUri().getQuery()).build();
+//        PridobiVaroaDto dto = varoaZrno.pridobiZadnjoSliko(query);
+//        if (dto == null) {
+//            return Response.status(Response.Status.NOT_FOUND).entity("{\"sporocilo\":\"Ta slika ne obstaja\"}").build();
+//        }
+//        return Response.ok(dto.getSlika(), MediaType.APPLICATION_OCTET_STREAM)
+//                .header("Access-Control-Expose-Headers", "*")
+//                .header("Content-Disposition", "inline; filename=\"" + dto.getIme_datoteke() + "\"")
+//                .header("Created", new SimpleDateFormat("d. MM. YYYY, HH:mm:ss").format(dto.getUstvarjeno()))
+//                .build();
+//
+//    }
+
     @GET
-    @Path("/latest")
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
-    public Response najnovejsaVaroa() {
+    public Response pridobiVaroa() {
         QueryParameters query = QueryParameters.query(uriInfo.getRequestUri().getQuery()).build();
-        PridobiVaroaDto dto = varoaZrno.pridobiZadnjoSliko(query);
+        PridobiVaroaDto dto = varoaZrno.pridobiSliko(query);
         if (dto == null) {
-            return Response.status(Response.Status.NOT_FOUND).entity("{\"sporocilo\":\"Ta slika ne obstaja\"}").build();
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("{\"sporocilo\":\"Ta slika ne obstaja\"}")
+                    .header("Access-Control-Expose-Headers", "*")
+                    .header("X-Total-Count", 0)
+                    .build();
         }
         return Response.ok(dto.getSlika(), MediaType.APPLICATION_OCTET_STREAM)
                 .header("Access-Control-Expose-Headers", "*")
                 .header("Content-Disposition", "inline; filename=\"" + dto.getIme_datoteke() + "\"")
                 .header("Created", new SimpleDateFormat("d. MM. YYYY, HH:mm:ss").format(dto.getUstvarjeno()))
+                .header("X-Total-Count", varoaZrno.stMeritev(query))
                 .build();
 
     }

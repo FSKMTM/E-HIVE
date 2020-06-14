@@ -23,35 +23,32 @@ const routes = [
     component: Actual
   },
   {
-    path: '/grafi',
-    name: 'Grafi',
-    component: Graphs
+    path: '/meritve',
+    name: 'Meritve',
+    component: Measurements
+  },
+  {
+    path: '/varoa',
+    name: 'Varoa',
+    component: Varoa
   },
   {
     path: '/promet',
     name: 'Promet',
     component: Traffic
   },
-  {
-    path: '/meritve',
-    name: 'Meritve',
-    component: Measurements
-  },
+
   {
     path: '/nastavitve',
     name: 'Nastavitve',
     component: Settings
-  },
-  {
-    path: '/varoa',
-    name: 'Varoa',
-    component: Varoa
   }
+
 
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  /* mode: 'history', */
   routes
 })
 

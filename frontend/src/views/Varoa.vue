@@ -58,28 +58,25 @@
 						style="text-shadow: 1px 1px 2px #333;"
 
 					>
-						<!-- Text slides with image -->
 						<b-carousel-slide
 							v-for="(varoa, index) in varoaSlike"
 							:key="index"
 							:caption="varoa.ustvarjeno"
 							:img-src="varoa.src"
 						></b-carousel-slide>
-
-						<!-- Slide with blank fluid image to maintain slide aspect ratio -->
-						<!-- <b-carousel-slide caption="Blank Image" img-blank img-alt="Blank image">
-							<p>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eros felis, tincidunt
-								a tincidunt eget, convallis vel est. Ut pellentesque ut lacus vel interdum.
-							</p>
-						</b-carousel-slide> -->
 					</b-carousel>
+					<!-- <b-alert
+						:show="totalCount === 0"
+						variant="info"
+					>
+						Za ta dan ni na voljo nobene slike odpada varoe.
+					</b-alert> -->
 					<b-alert
-							:show="tezave_slika"
-							variant="danger"
-						>
-							Prišlo je do težave pri pridobivanju slike dnevnega odpada. Slika verjetno ne obstaja.
-						</b-alert>
+						:show="tezave_slika"
+						variant="info"
+					>
+						Prišlo je do težave pri pridobivanju slike dnevnega odpada. Slika verjetno ne obstaja.
+					</b-alert>
         </b-container>
 
 
@@ -157,6 +154,7 @@ export default {
 			.then((response) => {
 				this.offset += 1
 				this.totalCount = response.headers.get('x-total-count')
+				console.log(this.totalCount)
 				if (response.ok) {
 					this.varoa_ustvarjena = response.headers.get('created')
 					this.tezave_slika = false
@@ -192,7 +190,7 @@ export default {
 	width: 100%
 }
 .varoa-container {
-	margin-top:30px;
+	margin-top:60px;
 	margin-bottom:30px;
 }
 

@@ -153,7 +153,7 @@ export default {
 
 <style scoped>
 .actual-container {
-	margin-top:30px;
+	margin-top:60px;
 }
 </style>
 

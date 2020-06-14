@@ -4,7 +4,7 @@
       <Topbar></Topbar>
     </div>
     <div>
-      <div class="app-container">
+      <div>
         <router-view :podnice="podnice"></router-view>
       </div>
     </div>

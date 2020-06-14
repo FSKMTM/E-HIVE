@@ -248,7 +248,7 @@ export default {
 	width: 100%
 }
 .measurements-container {
-	margin-top:30px;
+	margin-top:60px;
 }
 /* .datepicker-container {
 	margin: 0px

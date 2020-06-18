@@ -47,7 +47,7 @@ public class PodnicaVir {
     }
 
     @POST
-    public Response ustvariUporabnika(UrejanjePodniceDto pod) {
+    public Response ustvariPodnico(UrejanjePodniceDto pod) {
         Podnica podnica = new Podnica();
         podnica.setNaziv(pod.getNaziv());
 

@@ -33,12 +33,6 @@ const routes = [
     component: Varoa
   },
   {
-    path: '/promet',
-    name: 'Promet',
-    component: Traffic
-  },
-
-  {
     path: '/nastavitve',
     name: 'Nastavitve',
     component: Settings

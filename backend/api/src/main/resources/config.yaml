@@ -12,5 +12,5 @@ kumuluzee:
   - jndi-name: jdbc/EhiveDS
     connection-url: jdbc:postgresql://localhost:5432/pkp
     username: postgres
-    password: postgresHIVE
+    password: PGpostgres
     max-pool-size: 20

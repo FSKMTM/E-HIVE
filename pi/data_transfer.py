@@ -7,6 +7,12 @@ PODNICA_ID = 1
 url = "http://83.212.82.142:8081/v1"
 # url = "http://localhost:8081/v1"
 
+# mozni tipi so sledeci:
+# - TEZA,
+# - TEMP1 (zunanja temperatura),
+# - TEMP2 (notranja temperatura),
+# - VLA1 (zunanja vlaga),
+# - VLA2 (notranja vlaga)
 def poslji_meritev(vrednost, cas_meritve, tip):
     data = {
         "vrednost": vrednost,

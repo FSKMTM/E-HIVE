@@ -18,6 +18,8 @@ Ustrezno morate geslo nastaviti tudi v `backend/api/src/main/resources/config.ya
 docker run -d --name e-hive -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=GESLO -e POSTGRES_DB=pkp -v $PWD:/docker-entrypoint-initdb.d -p 5432:5432 postgres:10.5
 ```
 
+V direktoriju, iz katerega se bo na koncu poganjalo aplikacijo, je potrebno ustvariti mapo `slike`.
+
 ## Frontend
 V primeru sprememb v mapi `frontend` je potrebno pognati sledeči ukaz (ukaz se požene v mapi `frontend`):
 
@@ -57,4 +59,10 @@ tmux new-session -s e-hive
  ```
  java -jar api-1.0-SNAPSHOT.jar
  ```
+ 
+ ## Priprava podnice
+ 
+ Preko aplikacije pod zavihkom `Nastavitve` je potrebno ustvariti novo podnico. 
+ Po uspešnem dodajanju se nova podnica prikaže v tabeli vseh podnic v istem zavihku. 
+ Izpisano vrednost `Id` je potrebno popraviti v `pi/data_transfer.py`, torej ustrezno nastaviti spremenljivko `PODNICA_ID`.
 

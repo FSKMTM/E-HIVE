@@ -77,6 +77,10 @@
 					>
 						Prišlo je do težave pri pridobivanju slike dnevnega odpada. Slika verjetno ne obstaja.
 					</b-alert>
+					<img
+						v-if="!varoaSlike.length && !tezave_slika"
+						src="../assets/loader.gif"
+					>
         </b-container>
 
 

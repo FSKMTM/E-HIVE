@@ -1,6 +1,7 @@
 package si.fs.kmtm.ehive.api.v1.viri;
 
 
+import com.kumuluz.ee.cors.annotations.CrossOrigin;
 import si.fs.kmtm.ehive.entitete.Podnica;
 import si.fs.kmtm.ehive.storitve.dto.UrejanjePodniceDto;
 import si.fs.kmtm.ehive.storitve.zrna.PodnicaZrno;
@@ -12,6 +13,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
+@CrossOrigin(supportedMethods = "GET, POST, PUT, HEAD, DELETE")
 @Path("podnice")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -66,6 +68,7 @@ public class PodnicaVir {
             podnica.setNaziv(pod.getNaziv());
         podnicaZrno.posodobiPodnico(podnica);
 
-        return Response.status(Response.Status.OK).build();
+
+        return Response.status(Response.Status.OK).entity(podnicaZrno.pridobiPodnico(podnicaId)).build();
     }
 }

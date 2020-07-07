@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 import requests
 import math
 
@@ -37,6 +37,6 @@ def poslji_sliko(ime_datoteke, cas_meritve):
 
 
 # if __name__ == "__main__":
-#     time = datetime.now()
-#     poslji_meritev(20.0, time, "TEMP1")
+#     time = datetime.now(timezone(timedelta(hours=2)))
+#     poslji_meritev(27.0, time, "VLA2")
 #     poslji_sliko("beehive.jpg", time)

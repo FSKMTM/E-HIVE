@@ -158,7 +158,7 @@ export default {
 			.then((response) => {
 				this.offset += 1
 				this.totalCount = response.headers.get('x-total-count')
-				console.log(this.totalCount)
+				/* console.log(this.totalCount) */
 				if (response.ok) {
 					this.varoa_ustvarjena = response.headers.get('created')
 					this.tezave_slika = false

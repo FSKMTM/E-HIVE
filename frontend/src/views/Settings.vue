@@ -192,22 +192,29 @@ export default {
 				return 1
 			}
 			return 0
+		},
+		pripravaPodnicZaUrejanje(podnice) {
+			/* console.log(this.podnice) */
+			var p = podnice.slice().sort(this.compare)
+			this.items = []
+			for (var i = 0; i < p.length; i++) {
+				var item = p[i]
+				item.uredi = i
+				this.items.push(item)
+			}
 		}
 
 	},
 	watch: {
 		podnice: {
 			handler: function(newVal, oldVal) {
-				var tmp = newVal.slice().sort(this.compare)
-				this.items = []
-				for (var i = 0; i < tmp.length; i++) {
-					var item = tmp[i]
-					item.uredi = i
-					this.items.push(item)
-				}
+				this.pripravaPodnicZaUrejanje(newVal)
 			}
 		},
 		deep: true
+	},
+	created: function() {
+		this.pripravaPodnicZaUrejanje(this.podnice)
 	}
 }
 </script>

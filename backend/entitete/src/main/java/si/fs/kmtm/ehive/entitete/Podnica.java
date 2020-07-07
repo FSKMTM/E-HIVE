@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity(name = "podnica")
 @NamedQueries(value = {
-        @NamedQuery(name = "Podnica.getAll", query = "SELECT p FROM podnica p")
+        @NamedQuery(name = "Podnica.getAll", query = "SELECT p FROM podnica p ORDER BY p.id")
 })
 public class Podnica {
     @Id

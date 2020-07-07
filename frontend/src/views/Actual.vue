@@ -154,6 +154,7 @@ export default {
 <style scoped>
 .actual-container {
 	margin-top:60px;
+	margin-bottom:20px;
 }
 </style>
 

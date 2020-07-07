@@ -3,9 +3,7 @@ import VueRouter from 'vue-router'
 
 import Home from '../views/Home.vue'
 import Actual from '../views/Actual.vue'
-import Graphs from '../views/Graphs.vue'
 import Varoa from '../views/Varoa.vue'
-import Traffic from '../views/Traffic.vue'
 import Measurements from '../views/Measurements.vue'
 import Settings from '../views/Settings.vue'
 

@@ -2,12 +2,6 @@
 	<b-container class="measurements-container">
 		<h3>Vse meritve</h3>
         <div class="col col-sm-12 offset-sm-0 col-md-10 offset-md-1">
-            <!-- <SelectPodnica
-                v-if="podnice.length"
-                @izbrana-podnica="izbranaPodnica"
-                :podnice="podnice"
-            >
-            </SelectPodnica> -->
 						<b-alert
 							:show="manjkajocePolje"
 							variant="danger"
@@ -165,7 +159,7 @@ export default {
   },
 	methods: {
 		pridobiMeritve: function () {
-			console.log(this.iskalniNiz())
+			/* console.log(this.iskalniNiz()) */
 			fetch(global.restIp + "/meritve?" + this.iskalniNiz() + "&limit=" + this.limit + "&offset=" + this.offset + "&order=cas_meritve DESC", {
 				method: "get"
 			})
@@ -174,7 +168,7 @@ export default {
 					return response.json()
 				})
 				.then((jsonData) => {
-					console.log(jsonData)
+					/* console.log(jsonData) */
 					this.vsajEnoPridobivanjeMeritev = true
 					this.offset += this.limit
 					this.meritve.push.apply(this.meritve, jsonData)
@@ -249,10 +243,9 @@ export default {
 }
 .measurements-container {
 	margin-top:60px;
+	margin-bottom:20px;
 }
-/* .datepicker-container {
-	margin: 0px
-} */
+
 
 </style>
 

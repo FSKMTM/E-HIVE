@@ -7,6 +7,7 @@ V primeru namestitve na drug strežnik je potrebno spremeniti IP naslov v:
 - `frontend/src/global.js`: spremeni `restIp`
 - `backend/api/src/main/resources/config.yaml`: spremeni `base-url` in `port`
 - `pi/data_transfer.py`: spremeni `url`
+- `backend/api/src/main/java/si/fs/kmtm/ehive/api/v1/EhiveAplikacija.java` v definiciji `server`, spremenljivka `url`
 
 Na izbranem strežniku nato potrebujete imeti Postgres bazo oz. ustrezno Docker sliko.
 V našem primeru uporabljamo Docker.
@@ -65,4 +66,8 @@ tmux new-session -s e-hive
  Preko aplikacije pod zavihkom `Nastavitve` je potrebno ustvariti novo podnico. 
  Po uspešnem dodajanju se nova podnica prikaže v tabeli vseh podnic v istem zavihku. 
  Izpisano vrednost `Id` je potrebno popraviti v `pi/data_transfer.py`, torej ustrezno nastaviti spremenljivko `PODNICA_ID`.
+ 
+ ## Dokumetacija REST virov
+ 
+ Dokumentacija REST virov se nahaja na http://83.212.82.142:8081/api-specs/ui.
 
